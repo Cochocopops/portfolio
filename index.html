@@ -1,262 +1,120 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Corentin Chantereau Portfolio</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="mediaqueries.css" />
-  </head>
-  <body>
-    <!-- Desktop Navigation -->
-    <nav id="main-nav">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CV – Corentin Chantereau</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav class="navbar">
       <div class="logo">Corentin Chantereau</div>
-      <div>
-        <ul class="navigation-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+      <ul class="nav-links">
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
       </div>
     </nav>
+  </header>
 
-    <!-- Mobile Navigation -->
-    <nav id="mobile-nav">
-      <div class="logo">Corentin Chantereau</div>
-      <div class="menu-toggle">
-        <div class="toggle-icon" onclick="toggleMobileMenu()">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div class="mobile-menu-links">
-          <li><a href="#about" onclick="toggleMobileMenu()">About</a></li>
-          <li><a href="#experience" onclick="toggleMobileMenu()">Experience</a></li>
-          <li><a href="#projects" onclick="toggleMobileMenu()">Projects</a></li>
-          <li><a href="#contact" onclick="toggleMobileMenu()">Contact</a></li>
-        </div>
+  <!-- Profile -->
+  <section id="profile">
+    <div class="profile-text">
+      <h1>Corentin Chantereau</h1>
+      <p class="subtitle">Graduate Student in Creative Technology Engineering (ESILV)</p>
+      <p class="location">📍 Rueil-Malmaison, France</p>
+      <div class="buttons">
+        <a href="mailto:corentin.chantereau@edu.devinci.fr" class="btn">Email</a>
+        <a href="assets/CORENTIN CHANTEREAU.pdf" class="btn secondary" download>Download PDF</a>
       </div>
-    </nav>
+    </div>
+  </section>
 
-    <!-- Profile Section -->
-    <section id="profile">
-      <div class="section__pic-container">
-        <img src="./assets/profile-pic.png" alt="Corentin Chantereau profile picture" />
-      </div>
-      <div class="section__text">
-        <p class="section__text__p1">Hello, I'm</p>
-        <h1 class="title">Corentin Chantereau</h1>
-        <p class="section__text__p2">ESILV</p>
-        <div class="btn-container">
-          <button
-            class="btn btn-color-2"
-            onclick="window.open('./assets/CV Corentin Chantereau.pdf')"
-          >
-            Download CV
-          </button>
-          <button class="btn btn-color-1" onclick="location.href='#contact'">
-            Contact Info
-          </button>
-        </div>
-        <div id="socials-container">
-          <img
-            src="./assets/linkedin.png"
-            alt="My LinkedIn profile"
-            class="icon"
-            onclick="location.href='https://linkedin.com/in/corentin-chantereau/'"
-          />
-          <img
-            src="./assets/github.png"
-            alt="My Github profile"
-            class="icon"
-            onclick="location.href='https://github.com/Cochocopops'"
-          />
-        </div>
-      </div>
-    </section>
+  <!-- Education -->
+  <section id="education">
+    <h2>Education</h2>
+    <ul>
+      <li><strong>ESILV – MSc Creative Technology Engineering</strong> (2023–2026)<br/>
+      Track: Resilient Futures, Sustainable Design, HMI</li>
+      <li><strong>Dorset College Dublin</strong> – International Semester (2024)<br/>
+      Innovation, Product Development, International Business</li>
+      <li><strong>ECAM La Salle Lyon</strong> (2020–2023)<br/>
+      Mechanical design, materials science, industrial processes</li>
+    </ul>
+  </section>
 
-    <!-- About Section -->
-    <section id="about">
-      <p class="section__text__p1">Get To Know More</p>
-      <h1 class="title">About Me</h1>
-      <div class="section-container">
-        <div class="about-details-container">
-          <div class="about-containers">
-            <div class="details-container">
-              <img
-                src="./assets/experience.png"
-                alt="Experience icon"
-                class="icon"
-              />
-              <h3>Experience</h3>
-              <p>Projects in Software Development</p>
-            </div>
-            <div class="details-container">
-              <img
-                src="./assets/education.png"
-                alt="Education icon"
-                class="icon"
-              />
-              <h3>Education</h3>
-              <p>ESILV, Pôle Universitaire Léonard de Vinci</p>
-            </div>
-          </div>
-          <div class="text-container">
-            <p>
-              I am passionate about software development and engineering,
-              currently studying at ESILV. I have worked on multiple projects
-              involving AI, software development, and mechanical design.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+  <!-- Experience -->
+  <section id="experience">
+    <h2>Experience</h2>
+    <div class="exp-card">
+      <h3>Engineer & Artistic Collaborator – IFT Paris</h3>
+      <span>2025 – 4 months</span>
+      <p>Designed and prototyped innovative structures for the “Atlas Butterflies” exhibition. Integrated mechanics/electronics, coordinated stakeholders, documented procedures.</p>
+    </div>
+    <div class="exp-card">
+      <h3>R&D Intern – ADAS, BOSCH France</h3>
+      <span>2023 – 3 months</span>
+      <p>Contributed to ADAS testing: feasibility analysis, prototyping, risk assessment. Produced technical deliverables in multidisciplinary teams.</p>
+    </div>
+    <div class="exp-card">
+      <h3>Operator Intern – BRIAND CM</h3>
+      <span>2022 – 1 month</span>
+      <p>Immersion in steel construction: supported field teams and discovered the production cycle.</p>
+    </div>
+  </section>
 
-    <!-- Experience Section -->
-    <section id="experience">
-      <p class="section__text__p1">Explore My</p>
-      <h1 class="title">Experience</h1>
-      <div class="experience-details-container">
-        <div class="about-containers">
-          <div class="details-container">
-            <h2 class="experience-sub-title">Software Development</h2>
-            <div class="article-container">
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>JavaScript</h3>
-                  <p>Experienced</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>Python</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>SolidWorks</h3>
-                  <p>Experienced</p>
-                </div>
-              </article>
-              <article>
-                <img
-                  src="./assets/checkmark.png"
-                  alt="Experience icon"
-                  class="icon"
-                />
-                <div>
-                  <h3>MatLab</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+  <!-- Projects -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <ul>
+      <li><strong>Essential-Oil Diffuser (vegetable-tanned leather)</strong> — Kickstarter launch, +30 customers, €1,000 raised.</li>
+      <li><strong>Biobased Materials Development</strong> — Kombucha leather & mycelium prototypes for eco-packaging.</li>
+      <li><strong>High-Voltage Atmospheric Moisture Capture</strong> — Inspired by MIT study; electrostatic & mechanical design.</li>
+      <li><strong>Acoustic Drone Detector – Air Base 105</strong> — Field tests, prototyped detection device, structured test plans.</li>
+    </ul>
+  </section>
 
-    <!-- Projects Section -->
-    <section id="projects">
-      <p class="section__text__p1">Browse My Recent</p>
-      <h1 class="title">Projects</h1>
-      <div class="experience-details-container">
-        <div class="details-container color-container">
-          <div class="article-container">
-            <img
-              src="./assets/project-1.png"
-              alt="Project 1"
-              class="project-img"
-            />
-          </div>
-          <h2 class="experience-sub-title project-title">Safe Routes Mobile App</h2>
-          <div class="btn-container">
-            <button
-              class="btn btn-color-2 project-btn"
-              onclick="location.href='https://github.com/Cochocopops'"
-            >
-              Github
-            </button>
-          </div>
-        </div>
-        <div class="details-container color-container">
-          <div class="article-container">
-            <img
-              src="./assets/project-2.png"
-              alt="Project 2"
-              class="project-img"
-            />
-          </div>
-          <h2 class="experience-sub-title project-title">Java Voting Analysis Software</h2>
-          <div class="btn-container">
-            <button
-              class="btn btn-color-2 project-btn"
-              onclick="location.href='https://github.com/Cochocopops'"
-            >
-              Github
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
+  <!-- Skills -->
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div><strong>Design & Prototyping:</strong> SolidWorks, CATIA, 3D printing, mock-ups</div>
+      <div><strong>Materials & Packaging:</strong> Polymers, composites, biomaterials, eco-design</div>
+      <div><strong>Electronics & Digital:</strong> KiCad, prototyping sensors/actuators</div>
+      <div><strong>Simulation & Tools:</strong> ANSYS, MATLAB/Octave, FEMM 4.2</div>
+      <div><strong>Programming:</strong> Java, JavaScript, Python, C#, CSS, HTML</div>
+      <div><strong>Project Management:</strong> Planning, risk analysis, reporting</div>
+    </div>
+  </section>
 
-    <!-- Contact Section -->
-    <section id="contact">
-      <p class="section__text__p1">Get in Touch</p>
-      <h1 class="title">Contact Me</h1>
-      <div class="contact-info-upper-container">
-        <div class="contact-info-container">
-          <img
-            src="./assets/email.png"
-            alt="Email icon"
-            class="icon contact-icon email-icon"
-          />
-          <p><a href="mailto:corentin.chantereau@edu.devinci.fr">corentin.chantereau@edu.devinci.fr</a></p>
-        </div>
-        <div class="contact-info-container">
-          <img
-            src="./assets/linkedin.png"
-            alt="LinkedIn icon"
-            class="icon contact-icon"
-          />
-          <p><a href="https://linkedin.com/in/corentin-chantereau/">LinkedIn</a></p>
-        </div>
-      </div>
-    </section>
+  <!-- Languages & Interests -->
+  <section id="extra">
+    <h2>Languages & Interests</h2>
+    <p><strong>Languages:</strong> French (native), English (B2+, TOEIC 820)</p>
+    <p><strong>Interests:</strong> Gastronomy (Michelin experience), Tennis, Athletics (Dept. Champion), Student associations.</p>
+  </section>
 
-    <!-- Footer Section -->
-    <footer>
-      <nav>
-        <div class="nav-links-container">
-          <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-      </nav>
-      <p>Copyright &#169; 2024 Corentin Chantereau. All Rights Reserved.</p>
-    </footer>
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:corentin.chantereau@edu.devinci.fr">corentin.chantereau@edu.devinci.fr</a></p>
+    <p>Phone: +33 6 29 05 60 27</p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/corentin-chantereau" target="_blank">linkedin.com/in/corentin-chantereau</a></p>
+    <p>GitHub: <a href="https://github.com/Cochocopops" target="_blank">github.com/Cochocopops</a></p>
+  </section>
 
-    <!-- JavaScript for toggling mobile menu -->
-    <script src="script.js"></script>
-  </body>
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Corentin Chantereau</p>
+  </footer>
+</body>
 </html>

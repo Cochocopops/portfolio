@@ -1,0 +1,464 @@
+/* ======================
+   🔤 FONTS
+====================== */
+@font-face {
+  font-family: 'BebasNeue';
+  src: url('/fonts/BebasNeue-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'MavenPro';
+  src: url('/fonts/MavenPro-VariableFont_wght.ttf') format('truetype');
+}
+
+/* ======================
+   🎨 VARIABLES UTILES
+====================== */
+:root {
+  --nav-h: 100px;
+  --gap: clamp(24px, 2.2vw, 48px);
+}
+
+/* ======================
+   🌍 RESET GLOBAL
+====================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: white;
+  color: black;
+  font-family: 'MavenPro', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ======================
+   🧭 NAVBAR
+====================== */
+.navbar {
+  width: 100%;
+  height: var(--nav-h);
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Logo + menu */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.logo-link {
+  text-decoration: none;
+}
+
+.logo {
+  font-family: 'BebasNeue', sans-serif;
+  font-size: 2.8rem;
+  line-height: 0.9;
+  color: black;
+  letter-spacing: 1px;
+}
+
+/* Menu principal */
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.menu-item {
+  font-family: 'MavenPro', sans-serif;
+  color: black;
+  text-decoration: none;
+  font-size: 1.1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  padding: 0;
+  line-height: normal;
+  text-align: left;
+}
+
+/* Soulignement au survol */
+.menu-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background-color: black;
+  transition: width 0.2s ease-in-out;
+}
+
+.menu-item:hover::after {
+  width: 100%;
+}
+
+/* Lien actif */
+.menu-item.active::after {
+  width: 100%;
+}
+
+/* Icônes à droite */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.user-icon {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.user-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Burger menu */
+.burger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.burger span {
+  width: 25px;
+  height: 2px;
+  background: black;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.burger.open span:nth-child(1) {
+  transform: rotate(45deg) translateY(7px);
+}
+.burger.open span:nth-child(2) {
+  opacity: 0;
+}
+.burger.open span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-7px);
+}
+
+/* ======================
+   📱 RESPONSIVE MENU
+====================== */
+@media (max-width: 950px) {
+  .navbar {
+    padding: 0 2rem;
+  }
+
+  .navbar-menu {
+    position: fixed;
+    top: var(--nav-h);
+    right: -100%;
+    flex-direction: column;
+    background-color: white;
+    width: 240px;
+    height: calc(100vh - var(--nav-h));
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 2rem;
+    transition: right 0.3s ease;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    gap: 1.8rem;
+  }
+
+  .navbar-menu.active {
+    right: 0;
+  }
+
+  .menu-item {
+    width: 100%;
+    font-size: 1.1rem;
+    color: black;
+  }
+
+  .burger {
+    display: flex;
+  }
+}
+
+/* ======================
+   🩶 SECTION GRISE (3D)
+====================== */
+.hero-section {
+  background: #7a7a7a;
+  height: calc(114vh - var(--nav-h));
+  padding-top: var(--nav-h);
+  padding-bottom: var(--gap);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.home-links {
+  display: flex;
+  gap: 4rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-links a {
+  font-family: 'MavenPro', sans-serif;
+  color: white;
+  font-size: 1.5rem;
+  text-decoration: underline;
+  transition: 0.2s ease;
+}
+
+.home-links a:hover {
+  color: black;
+}
+
+/* ======================
+   ⚪ SECTION LATEST PROJECT
+====================== */
+.latest-project-section {
+  background: white;
+  color: black;
+  min-height: 100vh;
+  padding-top: var(--gap);
+  padding-left: 8rem;
+  padding-right: 2rem;
+  padding-bottom: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.latest-title {
+  font-family: 'BebasNeue', sans-serif;
+  font-size: clamp(2.2rem, 3vw, 3rem);
+  letter-spacing: 1px;
+  margin: var(--gap) 0;
+  text-align: left;
+}
+
+.project-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4rem;
+  justify-items: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.project-card a {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.project-img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.project-img:hover {
+  transform: scale(1.02);
+}
+
+.project-card h3 {
+  font-family: 'BebasNeue', sans-serif;
+  font-size: 1rem;
+  margin-top: 1rem;
+  letter-spacing: 1px;
+}
+
+/* ======================
+   ⚫ BANDEAU NOIR
+====================== */
+.black-band {
+  width: 100%;
+  height: clamp(80px, 12vh, 160px);
+  background-color: black;
+  margin-top: -4rem;
+}
+
+/* ======================
+   ⚪ FOOTER
+====================== */
+.footer {
+  background-color: white;
+  color: black;
+  text-align: center;
+  height: clamp(80px, 12vh, 120px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: clamp(0.8rem, 0.9vw + 0.3rem, 1rem);
+  letter-spacing: 0.5px;
+}
+
+/* ======================
+   📱 RESPONSIVE GLOBAL
+====================== */
+@media (max-width: 900px) {
+  .project-gallery {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .project-img {
+    max-width: 90%;
+  }
+
+  .latest-title {
+    font-size: 2.3rem;
+    text-align: center;
+  }
+
+  .latest-project-section {
+    padding: 5rem 2rem;
+  }
+
+  .home-links {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .home-links a {
+    font-size: 1.3rem;
+  }
+
+  .footer {
+    height: 120px;
+    padding-bottom: 0.5rem;
+  }
+}
+
+/* ======================
+   📂 DROPDOWNS ABOUT & PROJECTS
+====================== */
+.about-dropdown,
+.projects-dropdown {
+  position: relative;
+}
+
+/* Pont invisible pour éviter la fermeture instantanée */
+.about-dropdown::before,
+.projects-dropdown::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 8px;
+  top: 100%;
+}
+
+/* Lien principal */
+.menu-link {
+  position: relative;
+  color: #111;
+  text-decoration: none;
+  font-weight: 500;
+  padding-bottom: 3px;
+  transition: border-color 0.2s ease;
+}
+
+/* Chevron ▼ */
+.menu-link::after {
+  content: "▾";
+  font-size: 0.7rem;
+  margin-left: 5px;
+  color: #111;
+}
+
+/* Soulignement actif */
+.menu-link.active {
+  border-bottom: 2px solid #111;
+}
+
+/* Pas de double soulignement */
+.menu-link.active:hover {
+  border-bottom: 2px solid #111;
+}
+
+/* Hover normal si pas actif */
+.menu-link:not(.active):hover {
+  border-bottom: 2px solid #111;
+}
+
+/* Contenu déroulant */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0px);
+  left: 0;
+  background: white;
+  border: 1.5px solid #111;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  z-index: 300;
+
+  opacity: 0;
+  transform: translateY(-5px);
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Visible quand ouvert */
+.dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+  visibility: visible;
+}
+
+/* Liens internes */
+.dropdown-menu a {
+  display: block;
+  width: 100%;
+  color: #111;
+  text-decoration: none;
+  font-family: 'MavenPro', sans-serif;
+  font-size: 0.95rem;
+  padding: 12px 22px;
+  transition: all 0.2s ease;
+}
+
+.dropdown-menu a + a {
+  margin-top: 2px;
+}
+
+/* Effet hover */
+.dropdown-menu a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+}
+
+/* Supprime le violet navigateur */
+.dropdown-menu a:visited,
+.dropdown-menu a:active {
+  color: #111;
+}
