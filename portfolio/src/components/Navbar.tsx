@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import "../app/globals.css";
 import { User } from "lucide-react"; // ✅ icône utilisateur
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [projectsOpen, setProjectsOpen] = useState(false);
@@ -100,7 +101,9 @@ export default function Navbar() {
         <User
           size={24}
           className="user-icon"
-          onClick={() => alert("User menu (à personnaliser plus tard)")}
+          onClick={() => router.push('/utilisateur')}
+          role="button"
+          aria-label="Espace utilisateur"
         />
 
         <div
