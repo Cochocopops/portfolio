@@ -27,6 +27,13 @@ export const ALL_CATEGORIES = [
 
 export const PROJECTS: Project[] = [
   {
+    slug: 'rythme-car-game',
+    title: 'Rythme Car Game',
+    excerpt: 'Rhythm-based driving game in Python with interactive menu and score system.',
+    categories: ['CODE', 'GAME'],
+    image: '/assets/projects/Rythme_Car_Game/data/assets/voiture_icon.png',
+  },
+  {
     slug: 'florya',
     title: 'Florya – Kickstarter Project',
     excerpt: 'Vegetable‑tanned leather diffuser and artisanal product design.',

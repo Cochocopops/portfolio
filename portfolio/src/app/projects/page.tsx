@@ -1,8 +1,7 @@
 "use client";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { ALL_CATEGORIES, PROJECTS } from "./data";
-import { useEffect } from "react";
 
 type UserProject = {
   slug: string;
@@ -15,6 +14,7 @@ type UserProject = {
 export default function ProjectsIndexPage() {
   const [active, setActive] = useState<string>("ALL");
   const [userProjects, setUserProjects] = useState<UserProject[]>([]);
+  const [filterMenuOpen, setFilterMenuOpen] = useState(false);
 
   useEffect(() => {
     fetch('/api/projects')
@@ -32,13 +32,56 @@ export default function ProjectsIndexPage() {
   return (
     <main className="projects-page">
       <aside className="projects-sidebar">
-        <h2>Categories</h2>
-        <button className={`cat ${active === 'ALL' ? 'active' : ''}`} onClick={() => setActive('ALL')}>All</button>
-        {ALL_CATEGORIES.map(cat => (
-          <button key={cat} className={`cat ${active === cat ? 'active' : ''}`} onClick={() => setActive(cat)}>
-            {cat}
+        <h2></h2>
+        <ul className="cat-list">
+          <li><button className={`cat ${active === 'ALL' ? 'active' : ''}`} onClick={() => setActive('ALL')}>All</button></li>
+          {ALL_CATEGORIES.map(cat => (
+            <li key={cat}>
+              <button className={`cat ${active === cat ? 'active' : ''}`} onClick={() => setActive(cat)}>
+                {cat}
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        {/* Dropdown mobile/portrait */}
+        <div className={`filter-dropdown ${filterMenuOpen ? "open" : ""}`}>
+          <button
+            className="filter-button"
+            aria-haspopup="listbox"
+            aria-expanded={filterMenuOpen}
+            onClick={() => setFilterMenuOpen((v) => !v)}
+            onBlur={() => setFilterMenuOpen(false)}
+          >
+            Filter
           </button>
-        ))}
+          <ul className="filter-menu" role="listbox">
+            <li role="option">
+              <button
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={() => {
+                  setFilterMenuOpen(false);
+                  setActive('ALL');
+                }}
+              >
+                All
+              </button>
+            </li>
+            {ALL_CATEGORIES.map((cat) => (
+              <li key={cat} role="option">
+                <button
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={() => {
+                    setFilterMenuOpen(false);
+                    setActive(cat);
+                  }}
+                >
+                  {cat}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </aside>
 
       <section className="projects-grid">

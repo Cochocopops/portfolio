@@ -70,7 +70,7 @@ export default function Home() {
         <div className="project-gallery">
           {/* Projet 1 */}
           <div className="project-card">
-            <a href="/projects/atlas">
+            <a href="/projects/atlas-butterflies">
               <Image
                 src="/assets/projects/Project_1/Project1.png"
                 alt="Atlas Butterflies Project"
@@ -78,13 +78,16 @@ export default function Home() {
                 height={350}
                 className="project-img"
               />
-              <h3>ATLAS BUTTERFLIES PROJECT</h3>
+              <div className="project-info">
+                <h3>ATLAS BUTTERFLIES</h3>
+                <p className="project-legend">Kinetic installation combining engineering and art</p>
+              </div>
             </a>
           </div>
 
           {/* Projet 2 */}
           <div className="project-card">
-            <a href="/projects/kickstarter">
+            <a href="/projects/florya">
               <Image
                 src="/assets/projects/Project_2/Project2.png"
                 alt="Kickstarter Project"
@@ -92,7 +95,10 @@ export default function Home() {
                 height={350}
                 className="project-img"
               />
-              <h3>KICKSTARTER PROJECT</h3>
+              <div className="project-info">
+                <h3>FLORYA - KICKSTARTER</h3>
+                <p className="project-legend">Vegetable-tanned leather diffuser and artisanal product design</p>
+              </div>
             </a>
           </div>
         </div>

@@ -80,12 +80,13 @@ export default function Navbar() {
           </div>
 
           {/* AUTRES LIENS */}
-          <Link
-            href="/resume"
-            className={`menu-item ${pathname === "/resume" ? "active" : ""}`}
+          <a
+            href="/assets/home/CORENTIN CHANTEREAU.pdf"
+            download="CORENTIN_CHANTEREAU_CV.pdf"
+            className={`menu-item`}
           >
             Resume
-          </Link>
+          </a>
 
           <Link
             href="/contact"
