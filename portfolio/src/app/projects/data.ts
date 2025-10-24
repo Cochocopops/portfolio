@@ -27,6 +27,20 @@ export const ALL_CATEGORIES = [
 
 export const PROJECTS: Project[] = [
   {
+    slug: 'drone-hackathon',
+    title: 'Rescue Drone – Emergency Equipment Delivery',
+    excerpt: 'Long-range communication drone for delivering first aid equipment in isolated areas.',
+    categories: ['ARDUINO', 'CODE', 'EXPERIMENTATION', '3D PRINT'],
+    image: '/assets/projects/Drone_Hackathon/Drone.png',
+  },
+  {
+    slug: 'drone-detection',
+    title: 'Drone Detection System',
+    excerpt: 'Advanced drone detection and tracking system using RF technology.',
+    categories: ['CODE', 'ARDUINO', 'EXPERIMENTATION'],
+    image: '/assets/projects/Drone_Detection/Drone_Detection.png',
+  },
+  {
     slug: 'rythme-car-game',
     title: 'Rythme Car Game',
     excerpt: 'Rhythm-based driving game in Python with interactive menu and score system.',
