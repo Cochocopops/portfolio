@@ -74,8 +74,6 @@ export default function Navbar() {
             <div className={`dropdown-menu ${projectsOpen ? "show" : ""}`}>
               <Link href="/projects">All</Link>
               <Link href="/projects/latest">Latest Project</Link>
-              <Link href="/projects/academic">Academic / Research</Link>
-              <Link href="/projects/startup">Startup / Entrepreneurship</Link>
             </div>
           </div>
 

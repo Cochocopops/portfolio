@@ -87,8 +87,12 @@ export default function ProjectsIndexPage() {
       <section className="projects-grid">
         {filtered.map(p => (
           <Link key={p.slug} href={`/projects/${p.slug}`} className="project-card">
-            {/* Placeholder image path; will show once assets are uploaded */}
-            <img src={p.image} alt={p.title} className="project-thumb" />
+            <div className="project-image-wrapper">
+              <img src={p.image} alt={p.title} className="project-thumb" />
+              <div className="project-overlay">
+                <h3 className="project-overlay-title">{p.title}</h3>
+              </div>
+            </div>
             <h3>{p.title}</h3>
             <p>{p.excerpt}</p>
           </Link>

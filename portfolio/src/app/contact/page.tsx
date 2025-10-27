@@ -26,7 +26,7 @@ export default function ContactPage() {
       }
       alert('Message envoyé avec succès. Merci !');
       form.reset();
-    } catch (e) {
+    } catch {
       alert('Impossible d\'envoyer le message. Réessayez plus tard.');
     } finally {
       if (submitButton) {

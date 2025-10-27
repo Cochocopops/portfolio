@@ -1,11 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { PROJECTS } from "./projects/data";
 import "./globals.css";
 
 export default function Home() {
-  const [scrollProgress, setScrollProgress] = useState(0);
+  // Les 3 derniers projets (déjà triés dans data.ts)
+  const latestProjects = PROJECTS.slice(0, 3);
 
   // === SCROLL FLUIDE ENTRE PARTIE GRISE ET LATEST PROJECT ===
   useEffect(() => {
@@ -68,39 +70,24 @@ export default function Home() {
         <h2 className="latest-title">LATEST PROJECT</h2>
 
         <div className="project-gallery">
-          {/* Projet 1 */}
-          <div className="project-card">
-            <a href="/projects/atlas-butterflies">
-              <Image
-                src="/assets/projects/Project_1/Project1.png"
-                alt="Atlas Butterflies Project"
-                width={500}
-                height={350}
-                className="project-img"
-              />
-              <div className="project-info">
-                <h3>ATLAS BUTTERFLIES</h3>
-                <p className="project-legend">Kinetic installation combining engineering and art</p>
+          {latestProjects.map((project) => (
+            <a key={project.slug} href={`/projects/${project.slug}`} className="latest-card">
+              <div className="latest-image-wrapper">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  width={500}
+                  height={350}
+                  className="latest-img"
+                />
+                <div className="latest-overlay">
+                  <h3 className="latest-overlay-title">{project.title.toUpperCase()}</h3>
+                </div>
               </div>
+              <h3 className="latest-card-title">{project.title.toUpperCase()}</h3>
+              <p className="latest-card-excerpt">{project.excerpt}</p>
             </a>
-          </div>
-
-          {/* Projet 2 */}
-          <div className="project-card">
-            <a href="/projects/florya">
-              <Image
-                src="/assets/projects/Project_2/Project2.png"
-                alt="Kickstarter Project"
-                width={500}
-                height={350}
-                className="project-img"
-              />
-              <div className="project-info">
-                <h3>FLORYA - KICKSTARTER</h3>
-                <p className="project-legend">Vegetable-tanned leather diffuser and artisanal product design</p>
-              </div>
-            </a>
-          </div>
+          ))}
         </div>
       </section>
 

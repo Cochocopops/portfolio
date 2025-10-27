@@ -217,26 +217,37 @@ export default function FloryaPage() {
           </div>
         </section>
 
+        {/* Separator */}
+        <div style={{
+          width: '100%',
+          height: '1px',
+          background: 'linear-gradient(to right, transparent, #ddd, transparent)',
+          margin: '3rem 0'
+        }} />
+
         {/* Technologies */}
         <section style={{
-          paddingTop: '3rem',
-          borderTop: '1px solid #ddd'
+          marginBottom: '3rem'
         }}>
           <h2 style={{
             fontFamily: 'BebasNeue, sans-serif',
-            fontSize: '1.8rem',
-            marginBottom: '0.8rem'
+            fontSize: 'clamp(1.8rem, 3vw, 2.4rem)',
+            marginBottom: '1.5rem',
+            color: '#111',
+            letterSpacing: '0.03em'
           }}>
             Technologies
           </h2>
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
             {['Vegetable-tanned Leather', 'Artisanal Craftsmanship', 'Essential Oil Diffusion', 'Sustainable Design', 'Laser Cutting', 'Natural Materials'].map(tech => (
               <span key={tech} style={{
-                padding: '0.4rem 0.9rem',
-                background: '#eee',
+                padding: '0.6rem 1.2rem',
+                background: '#000',
+                color: '#fff',
                 borderRadius: 999,
-                fontSize: '0.9rem',
-                border: '1px solid #ddd'
+                fontSize: '0.95rem',
+                fontFamily: 'MavenPro, sans-serif',
+                fontWeight: '500'
               }}>
                 {tech}
               </span>

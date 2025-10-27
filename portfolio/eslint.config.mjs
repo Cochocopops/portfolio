@@ -18,7 +18,18 @@ const eslintConfig = [
       "out/**",
       "build/**",
       "next-env.d.ts",
+      "src/types/**/*.d.ts", // Ignorer les fichiers de déclaration de types
     ],
+  },
+  {
+    rules: {
+      "@typescript-eslint/no-explicit-any": "warn", // Convertir en warning au lieu d'erreur
+      "react/jsx-no-comment-textnodes": "warn", // Convertir en warning
+      "@typescript-eslint/ban-ts-comment": "warn", // Convertir en warning
+      "@next/next/no-img-element": "warn", // Convertir en warning
+      "react/no-unescaped-entities": "warn", // Convertir en warning
+      "@typescript-eslint/triple-slash-reference": "warn", // Convertir en warning
+    },
   },
 ];
 

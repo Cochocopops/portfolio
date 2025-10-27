@@ -2,18 +2,24 @@
 import Link from "next/link";
 import { PROJECTS } from "../data";
 
-export default function ProjectsAllPage() {
+export default function ProjectsStartupPage() {
+  // Filtrer les projets entrepreneuriaux (ceux avec Product Design ou Florya)
+  const startupProjects = PROJECTS.filter(p => 
+    p.categories.includes('Product Design') ||
+    p.slug === 'florya'
+  );
+
   return (
     <main className="projects-page">
       <aside className="projects-sidebar">
-        <h2>ALL PROJECTS</h2>
+        <h2>STARTUP & ENTREPRENEURSHIP</h2>
         <p style={{ fontSize: '0.95rem', color: '#666', marginTop: '1rem', maxWidth: '300px' }}>
-          Browse through all available projects
+          Projects focused on entrepreneurship and product development
         </p>
       </aside>
 
       <section className="projects-grid">
-        {PROJECTS.map(p => (
+        {startupProjects.map(p => (
           <Link key={p.slug} href={`/projects/${p.slug}`} className="project-card">
             <div className="project-image-wrapper">
               <img src={p.image} alt={p.title} className="project-thumb" />
@@ -29,4 +35,5 @@ export default function ProjectsAllPage() {
     </main>
   );
 }
+
 
