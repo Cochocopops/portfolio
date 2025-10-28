@@ -1,6 +1,6 @@
 // @ts-nocheck
 'use client';
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect, useMemo } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, useTexture, Center } from '@react-three/drei';
 import * as THREE from 'three';
@@ -9,22 +9,32 @@ function SofaModel() {
   const { scene } = useGLTF('/assets/projects/Mycelium/Canape.glb');
   const texture = useTexture('/assets/projects/Mycelium/arriere-plan-en-bois.jpg');
 
-  // Apply texture to all meshes in the scene
-  scene.traverse((child: any) => {
-    if (child.isMesh) {
-      child.material.map = texture;
-      child.material.needsUpdate = true;
-    }
-  });
+  // Clone the scene to avoid conflicts if reused
+  const clonedScene = useMemo(() => scene.clone(), [scene]);
+
+  // Apply texture to all meshes in the cloned scene
+  useEffect(() => {
+    clonedScene.traverse((child: any) => {
+      if (child.isMesh) {
+        // Clone material to avoid side effects
+        child.material = child.material.clone();
+        child.material.map = texture;
+        child.material.needsUpdate = true;
+      }
+    });
+  }, [clonedScene, texture]);
 
   return (
     <Center>
       <group rotation={[0, -Math.PI / 4, 0]} scale={0.05}>
-        <primitive object={scene} />
+        <primitive object={clonedScene} />
       </group>
     </Center>
   );
 }
+
+// Preload models for better performance
+useGLTF.preload('/assets/projects/Mycelium/Canape.glb');
 
 function Loader() {
   return (

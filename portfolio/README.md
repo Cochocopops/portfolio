@@ -1,36 +1,182 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio - Corentin Chantereau
 
-## Getting Started
+Portfolio personnel développé avec Next.js 15, présentant mes projets en design, technologie créative, biomaterials et ingénierie.
 
-First, run the development server:
+## 🚀 Démarrage rapide
+
+### Installation
+
+```bash
+npm install
+```
+
+### Développement
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrir [http://localhost:3000](http://localhost:3000) dans votre navigateur.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## 📁 Structure du projet
 
-To learn more about Next.js, take a look at the following resources:
+```
+portfolio/
+├── src/
+│   ├── app/              # Pages Next.js (App Router)
+│   │   ├── about/        # Page À propos
+│   │   ├── projects/     # Pages projets
+│   │   ├── contact/      # Page contact
+│   │   ├── utilisateur/  # Panel admin
+│   │   └── api/          # API Routes
+│   ├── components/       # Composants React réutilisables
+│   └── types/            # Définitions TypeScript
+├── public/               # Assets statiques
+│   ├── assets/
+│   │   ├── home/         # CV, certificats
+│   │   └── projects/     # Images et fichiers projets
+│   └── games/            # Jeux interactifs
+└── scripts/              # Scripts utilitaires
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ✨ Fonctionnalités
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Pages principales
+- **Accueil** : Carousel 3D interactif avec projets mis en avant
+- **Projects** : Galerie de projets filtrables par catégories
+- **About** : Présentation, compétences, parcours
+- **Contact** : Formulaire de contact fonctionnel
 
-## Deploy on Vercel
+### Fonctionnalités avancées
+- 🎨 **Visualisations 3D** : React Three Fiber pour modèles interactifs
+- 🔐 **Panel Admin** : Gestion de projets avec authentification
+- 📧 **Contact Email** : Envoi d'emails via Nodemailer
+- 📱 **Responsive** : Design adaptatif mobile/desktop
+- ⚡ **Optimisé** : Lazy loading, code splitting, performances
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🛠️ Technologies
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Framework** : Next.js 15 (App Router, Turbopack)
+- **UI** : React 19, Tailwind CSS 4
+- **3D** : Three.js, React Three Fiber, Drei
+- **Animations** : Framer Motion
+- **Email** : Nodemailer
+- **Icons** : Lucide React
+- **Langage** : TypeScript
+
+## 🎨 Composants 3D
+
+### HomeCarousel3D
+Carousel interactif affichant des modèles 3D en rotation (canapé mycelium, radar).
+
+### RadarScene
+Scène 3D complexe avec détection de drones, contrôles interactifs et matériaux PBR.
+
+### MyceliumSofaScene
+Visualisation 3D du canapé en mycelium avec textures personnalisées.
+
+## 📝 Ajouter un projet
+
+1. Ajouter les assets dans `public/assets/projects/[slug]/`
+2. Éditer `src/app/projects/data.ts` :
+
+```typescript
+{
+  slug: 'mon-projet',
+  title: 'Mon Projet',
+  excerpt: 'Description courte',
+  categories: ['Product Design', 'Innovation'],
+  image: '/assets/projects/mon-projet/cover.jpg',
+  date: '2025-01-15',
+}
+```
+
+3. Créer la page `src/app/projects/[slug]/page.tsx`
+
+## 🔐 Panel Admin
+
+Accès : `/utilisateur`
+
+Fonctionnalités :
+- ✅ Authentification sécurisée
+- ✅ Ajout/modification de projets
+- ✅ Upload d'images
+- ✅ Gestion des métadonnées
+
+### Configuration
+
+Créer `.env.local` :
+
+```env
+# Authentification Admin
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=votre_mot_de_passe_securise
+
+# Email Contact (optionnel)
+EMAIL_USER=votre@email.com
+EMAIL_PASS=votre_mot_de_passe_app
+EMAIL_TO=destination@email.com
+```
+
+## 📧 Configuration Email
+
+Pour activer le formulaire de contact, configurer les variables d'environnement email dans `.env.local`.
+
+**Gmail** : Utiliser un [mot de passe d'application](https://support.google.com/accounts/answer/185833).
+
+## 🎮 Jeux intégrés
+
+Le portfolio inclut des jeux interactifs dans `public/games/`.
+
+Exemple : Rythme Car Game (Python → Web avec Pygbag)
+
+## 📦 Dépendances principales
+
+```json
+{
+  "@react-three/drei": "^10.7.6",
+  "@react-three/fiber": "^9.4.0",
+  "framer-motion": "^12.23.24",
+  "lucide-react": "^0.545.0",
+  "next": "15.5.4",
+  "nodemailer": "^6.9.15",
+  "three": "^0.180.0"
+}
+```
+
+## 🚀 Déploiement
+
+### Vercel (Recommandé)
+
+1. Push sur GitHub
+2. Connecter à [Vercel](https://vercel.com)
+3. Configurer les variables d'environnement
+4. Déployer
+
+### Autre hébergeur
+
+```bash
+npm run build
+npm start
+```
+
+## 📄 Licence
+
+© 2025 Corentin Chantereau - Tous droits réservés
+
+## 🔗 Liens
+
+- **LinkedIn** : [linkedin.com/in/corentin-chantereau](https://www.linkedin.com/in/corentin-chantereau)
+- **GitHub** : [github.com/corentinchantereau](https://github.com/corentinchantereau)
+- **Email** : corentin.chantereau@edu.devinci.fr
+
+---
+
+Développé avec ❤️ par Corentin Chantereau

@@ -30,11 +30,15 @@ export async function POST(request: Request) {
     });
 
     const html = `
-      <div style="font-family: Arial, sans-serif;">
-        <p><strong>Nom:</strong> ${String(name)}</p>
-        <p><strong>Email:</strong> ${String(email)}</p>
-        <p><strong>Sujet:</strong> ${String(subject)}</p>
-        <p><strong>Message:</strong><br/>${String(message).replace(/\n/g, '<br/>')}</p>
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background: #f9f9f9; border-radius: 8px;">
+        <h2 style="color: #111; border-bottom: 2px solid #111; padding-bottom: 10px;">New Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${String(name)}</p>
+        <p><strong>Email:</strong> <a href="mailto:${String(email)}">${String(email)}</a></p>
+        <p><strong>Subject:</strong> ${String(subject)}</p>
+        <div style="margin-top: 20px; padding: 15px; background: white; border-radius: 5px; border-left: 4px solid #111;">
+          <p style="margin: 0;"><strong>Message:</strong></p>
+          <p style="margin-top: 10px; line-height: 1.6;">${String(message).replace(/\n/g, '<br/>')}</p>
+        </div>
       </div>
     `;
 

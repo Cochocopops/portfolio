@@ -1,45 +1,44 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import "../app/globals.css";
-import { User } from "lucide-react"; // ✅ icône utilisateur
+import { User } from "lucide-react";
 
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
-  const [projectsOpen, setProjectsOpen] = useState(false);
 
-  // Fermer les dropdowns au scroll
-  useEffect(() => {
-    const closeDropdowns = () => {
-      setAboutOpen(false);
-      setProjectsOpen(false);
-    };
-    window.addEventListener("scroll", closeDropdowns);
-    return () => window.removeEventListener("scroll", closeDropdowns);
+  // Close dropdowns on scroll
+  const closeDropdowns = useCallback(() => {
+    setAboutOpen(false);
   }, []);
 
-  // Fermer le menu mobile quand on change de page
+  useEffect(() => {
+    window.addEventListener("scroll", closeDropdowns, { passive: true });
+    return () => window.removeEventListener("scroll", closeDropdowns);
+  }, [closeDropdowns]);
+
+  // Close mobile menu when changing page
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
 
   return (
     <nav className="navbar">
-      {/* === Bloc gauche : logo + menu === */}
+      {/* === Left block: logo + menu === */}
       <div className="navbar-left">
         {/* Logo */}
         <Link href="/" className="logo-link">
           <h1 className="logo">CORENTIN<br />CHANTEREAU</h1>
         </Link>
 
-        {/* Menu principal (collé au nom) */}
+        {/* Main menu (attached to name) */}
         <div className={`navbar-menu ${menuOpen ? "active" : ""}`}>
-          {/* ABOUT */}
+          {/* About dropdown */}
           <div
             className="about-dropdown"
             onMouseEnter={() => setAboutOpen(true)}
@@ -58,26 +57,15 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* PROJECTS */}
-          <div
-            className="projects-dropdown"
-            onMouseEnter={() => setProjectsOpen(true)}
-            onMouseLeave={() => setProjectsOpen(false)}
+          {/* Projects link */}
+          <Link
+            href="/projects"
+            className={`menu-item ${pathname.startsWith("/projects") ? "active" : ""}`}
           >
-            <Link
-              href="/projects"
-              className={`menu-link ${pathname.startsWith("/projects") ? "active" : ""}`}
-            >
-              Projects
-            </Link>
+            Projects
+          </Link>
 
-            <div className={`dropdown-menu ${projectsOpen ? "show" : ""}`}>
-              <Link href="/projects">All</Link>
-              <Link href="/projects/latest">Latest Project</Link>
-            </div>
-          </div>
-
-          {/* AUTRES LIENS */}
+          {/* Other links */}
           <a
             href="/assets/home/CORENTIN CHANTEREAU.pdf"
             download="CORENTIN_CHANTEREAU_CV.pdf"
@@ -95,14 +83,14 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* === Icône utilisateur + burger === */}
+      {/* === User icon + burger === */}
       <div className="navbar-right">
         <User
           size={24}
           className="user-icon"
           onClick={() => router.push('/utilisateur')}
           role="button"
-          aria-label="Espace utilisateur"
+          aria-label="User space"
         />
 
         <div

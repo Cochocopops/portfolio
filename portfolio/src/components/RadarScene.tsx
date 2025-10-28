@@ -76,10 +76,6 @@ function applyRadarMaterials(model: THREE.Object3D): {
   };
 
   // Parcourir tous les enfants du modèle
-  if (process.env.NODE_ENV === 'development') {
-    console.log('🎨 Application des matériaux PBR...');
-  }
-  
   model.traverse((child) => {
     // Utiliser child.type au lieu de instanceof pour les objets chargés par GLTF
     if (child.type === 'Mesh') {
@@ -99,7 +95,6 @@ function applyRadarMaterials(model: THREE.Object3D): {
           clearcoat: 0.3,
           clearcoatRoughness: 0.4,
         });
-        console.log('✅ Parabole (métal satiné)');
       }
 
       // ========================================
@@ -221,10 +216,6 @@ function applyRadarMaterials(model: THREE.Object3D): {
       mesh.receiveShadow = true;
     }
   });
-
-  if (process.env.NODE_ENV === 'development') {
-    console.log('✅ Matériaux PBR appliqués');
-  }
 
   return refs;
 }
@@ -385,18 +376,7 @@ const RadarModel = memo(({ targetRotationRef, manualGreenLEDRef, manualRedLEDRef
   // Configuration du modèle (une seule fois)
   useEffect(() => {
     if (!scene) return;
-
-    if (process.env.NODE_ENV === 'development') {
-      scene.traverse((child: any) => {
-        console.log("🟦", child.name, "|", child.type);
-      });
-    }
-
     if (!groupRef.current) return;
-
-    if (process.env.NODE_ENV === 'development') {
-      console.log('🎨 Application des matériaux PBR...');
-    }
     
     // Appliquer les matériaux PBR réalistes avec les VRAIS NOMS
     const materialRefs = applyRadarMaterials(scene);
@@ -460,7 +440,7 @@ const RadarModel = memo(({ targetRotationRef, manualGreenLEDRef, manualRedLEDRef
                 baseGroup.attach(meshes['POTENTIOMETER-1']);
               }
               
-              // Rechercher le bouton avec encodage flexible
+              // Search button with flexible encoding
               const boutonKey = Object.keys(meshes).find(key => 
                 key.toLowerCase().includes('bouton') && key.toLowerCase().includes('potentiom')
               );
@@ -485,7 +465,7 @@ const RadarModel = memo(({ targetRotationRef, manualGreenLEDRef, manualRedLEDRef
             
             // ÉTAPE 3 : Centrer le radar et le poser au sol
             const boxRadar = new THREE.Box3().setFromObject(radarGroup);
-            const center = new THREE.Vector3();
+              const center = new THREE.Vector3();
             boxRadar.getCenter(center);
             
             // Centrer horizontalement (X et Z)
@@ -512,15 +492,11 @@ const RadarModel = memo(({ targetRotationRef, manualGreenLEDRef, manualRedLEDRef
               const pivotWorld = new THREE.Vector3();
               socle2Box.getCenter(pivotWorld);
               
-              console.log('📍 Pivot world:', { x: pivotWorld.x.toFixed(3), y: pivotWorld.y.toFixed(3), z: pivotWorld.z.toFixed(3) });
-              
               // Convertir en local du radarGroup
               const pivotLocal = radarGroup.worldToLocal(pivotWorld.clone());
               
               // Déplacer le rotationGroup au pivot
               rotationGroup.position.copy(pivotLocal);
-              
-              console.log('📍 Pivot local:', { x: pivotLocal.x.toFixed(3), y: pivotLocal.y.toFixed(3), z: pivotLocal.z.toFixed(3) });
               
               // Ajuster les positions locales des enfants pour qu'ils restent visuellement au même endroit
               // (compenser le déplacement du parent)
@@ -531,44 +507,10 @@ const RadarModel = memo(({ targetRotationRef, manualGreenLEDRef, manualRedLEDRef
                 rotationGroup.worldToLocal(parabolaWorldPos);
                 meshes['Parabole_Drone_Detection-1'].position.copy(parabolaWorldPos);
               }
-              
-              console.log('✅ Rotation centrée sur le centre de Socle2-1');
             }
 
     // Assigner le groupe de rotation au ref
     pivotGroupRef.current = rotationGroup;
-    
-    console.log('\n📊 === VÉRIFICATION FINALE ===');
-    console.log('Radar:', {
-      scale: radarGroup.scale,
-      position: {
-        x: radarGroup.position.x.toFixed(3),
-        y: radarGroup.position.y.toFixed(3),
-        z: radarGroup.position.z.toFixed(3)
-      }
-    });
-    console.log('Pivot actif:', {
-      x: rotationGroup.position.x.toFixed(3),
-      y: rotationGroup.position.y.toFixed(3),
-      z: rotationGroup.position.z.toFixed(3)
-    });
-    console.log('Hiérarchie:', {
-      radarGroup: radarGroup.children.length + ' enfants',
-      baseGroup: baseGroup.children.length + ' enfants',
-      rotationGroup: rotationGroup.children.length + ' enfants'
-    });
-    
-    console.log('\n🏗️ Hiérarchie créée:');
-    console.log('  RadarGroup');
-    console.log('    ├─ BaseGroup (fixe)');
-    console.log('    │   ├─ Socle4-1 (au sol)');
-    console.log('    │   ├─ Socle1-1');
-    console.log('    │   ├─ LEDs');
-    console.log('    │   └─ Potentiomètres');
-    console.log('    └─ RotationGroup (pivot au centre de Socle2)');
-    console.log('        ├─ Socle2-1');
-    console.log('        └─ Parabole_Drone_Detection-1');
-    console.log('');
 
   }, [scene]);
 
@@ -582,16 +524,6 @@ const RadarModel = memo(({ targetRotationRef, manualGreenLEDRef, manualRedLEDRef
     // Faire tourner le groupe pivot autour de l'axe Y
     if (pivotGroupRef.current) {
       pivotGroupRef.current.rotation.y = currentRotationRef.current;
-      
-      // Rotation lisse sans logs excessifs
-      if (Math.abs(currentRotationRef.current - oldRotation) > 0.001 && process.env.NODE_ENV === 'development') {
-        // Log uniquement en mode dev et avec throttle
-        const now = Date.now();
-        if (now - lastDetectionLog.current > 5000) {
-          console.log('🔄 Rotation:', currentRotationRef.current.toFixed(2), 'rad');
-          lastDetectionLog.current = now;
-        }
-      }
     }
     
     // Animation du potentiomètre sur lui-même (optionnel)
@@ -623,12 +555,6 @@ const RadarModel = memo(({ targetRotationRef, manualGreenLEDRef, manualRedLEDRef
         // Cône de détection de 30°
           if (angleDeg < 30) {
             autoDetecting = true;
-          // Log seulement toutes les 2 secondes
-          const now = Date.now();
-          if (now - lastDetectionLog.current > 2000) {
-            console.log('🎯 Drone détecté ! Angle:', angleDeg.toFixed(1), '°');
-            lastDetectionLog.current = now;
-            }
           }
         });
       }
@@ -645,19 +571,13 @@ const RadarModel = memo(({ targetRotationRef, manualGreenLEDRef, manualRedLEDRef
         ledGreenMat.emissiveIntensity = 2.5;
         ledRedMat.emissiveIntensity = 0.1;
         newState = 'green';
-        if (lastLEDState.current !== 'green') {
-          console.log('💚 Mode manuel : LED verte ON');
-          lastLEDState.current = 'green';
-        }
+        lastLEDState.current = 'green';
         } else if (manualRedLEDRef.current) {
         // Mode manuel : LED rouge allumée
         ledGreenMat.emissiveIntensity = 0.1;
         ledRedMat.emissiveIntensity = 2.5;
         newState = 'red';
-        if (lastLEDState.current !== 'red') {
-          console.log('❤️ Mode manuel : LED rouge ON');
-          lastLEDState.current = 'red';
-        }
+        lastLEDState.current = 'red';
         } else {
         // Mode automatique : selon détection des drones
           if (autoDetecting) {
@@ -665,30 +585,15 @@ const RadarModel = memo(({ targetRotationRef, manualGreenLEDRef, manualRedLEDRef
           ledGreenMat.emissiveIntensity = 2.5;
           ledRedMat.emissiveIntensity = 0.1;
           newState = 'green';
-          if (lastLEDState.current !== 'green') {
-            console.log('💚 Détection auto : LED verte ON');
-            lastLEDState.current = 'green';
-          }
+          lastLEDState.current = 'green';
           } else {
           // Pas de drone → LED rouge
           ledGreenMat.emissiveIntensity = 0.1;
           ledRedMat.emissiveIntensity = 1.8;
           newState = 'red';
-          if (lastLEDState.current !== 'red') {
-            console.log('❤️ Pas de détection : LED rouge ON');
-            lastLEDState.current = 'red';
-          }
+          lastLEDState.current = 'red';
         }
       }
-    } else {
-      // Log si les LEDs ne sont pas trouvées (une seule fois)
-      if (!ledRedRef.current && lastLEDState.current !== 'off') {
-        console.warn('⚠️ LED rouge non trouvée !');
-      }
-      if (!ledGreenRef.current && lastLEDState.current !== 'off') {
-        console.warn('⚠️ LED verte non trouvée !');
-      }
-      lastLEDState.current = 'off';
     }
   });
 
@@ -761,75 +666,34 @@ const HDRIEnvironment = memo(() => {
     scene.add(fallbackSkyDome);
     setSkyDome(fallbackSkyDome);
     scene.environment = fallbackTexture;
-    console.log('🌤️ Ciel procédural appliqué (SkyDome 1000 unités)');
 
     // Tenter de charger l'image de ciel en arrière-plan
     const loader = new THREE.TextureLoader();
     const skyPath = '/assets/projects/Drone_Detection/DaySkyHDRI046B_8K-TONEMAPPED.jpg';
-    console.log('🔄 Début du chargement du ciel:', skyPath);
-    console.log('🔄 URL complète:', window.location.origin + skyPath);
-    
-    // Tester d'abord si le fichier est accessible
-    fetch(skyPath, { method: 'HEAD' })
-      .then(response => {
-        console.log('📡 Réponse du serveur:', response.status, response.statusText);
-        console.log('📦 Type de contenu:', response.headers.get('content-type'));
-        console.log('📏 Taille du fichier:', response.headers.get('content-length'), 'octets');
-        
-        if (response.ok) {
-          console.log('✅ Fichier accessible, démarrage du chargement...');
-        } else {
-          console.error('❌ Fichier non accessible:', response.status);
-        }
-      })
-      .catch(err => console.error('❌ Erreur de vérification:', err));
     
     loader.load(
       skyPath,
       (texture) => {
         // Succès : remplacer le fallback par l'image
-        console.log('🎉 TEXTURE CHARGÉE AVEC SUCCÈS !');
-        console.log('📦 Dimensions:', texture.image?.width, 'x', texture.image?.height);
-        console.log('📦 Format:', texture.format);
-        console.log('📦 Type:', texture.type);
-        
         // Configuration de la texture pour le ciel
         texture.mapping = THREE.EquirectangularReflectionMapping;
         texture.colorSpace = THREE.SRGBColorSpace;
         texture.needsUpdate = true;
         
-        console.log('🔧 Texture configurée, mise à jour du SkyDome...');
-        
         // Mettre à jour le matériau existant
         if (fallbackSkyDome.material instanceof THREE.MeshBasicMaterial) {
           fallbackSkyDome.material.map = texture;
           fallbackSkyDome.material.needsUpdate = true;
-          console.log('✅ Matériau du SkyDome mis à jour');
         }
         
         // Mettre à jour l'environnement
         scene.environment = texture;
         scene.background = texture;
         fallbackTexture.dispose();
-        
-        console.log('✨ CIEL JPG 8K APPLIQUÉ AVEC SUCCÈS !');
       },
-      (progress) => {
-        if (progress.lengthComputable) {
-          const percent = (progress.loaded / progress.total) * 100;
-          const loaded = (progress.loaded / 1024 / 1024).toFixed(2);
-          const total = (progress.total / 1024 / 1024).toFixed(2);
-          console.log(`⏳ Chargement: ${percent.toFixed(0)}% (${loaded}/${total} MB)`);
-        } else {
-          console.log('⏳ Chargement en cours... (taille inconnue)');
-        }
-      },
-      (error) => {
-        console.error('❌ ERREUR DE CHARGEMENT !');
-        console.error('❌ Type d\'erreur:', error);
-        console.error('❌ Message:', error?.message || 'Pas de message');
-        console.error('❌ Stack:', error?.stack || 'Pas de stack');
-        console.warn('⚠️ Le ciel procédural reste actif');
+      undefined,
+      () => {
+        // Erreur de chargement : le ciel procédural reste actif
       }
     );
 
@@ -941,11 +805,10 @@ const Ground = memo(() => {
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(80, 80);
         setConcreteTexture(texture);
-        console.log('✅ Texture béton clean-concrete_albedo.png chargée avec succès');
       },
       undefined,
-      (error) => {
-        console.log('⚠️ Texture PNG non trouvée, utilisation de la texture procédurale');
+      () => {
+        // Texture PNG non trouvée, utilisation de la texture procédurale
       }
     );
   }, []);
@@ -977,13 +840,6 @@ const Scene = memo(({
     }
   };
 
-  // Log des paramètres de caméra au montage
-  useEffect(() => {
-    console.log('🎯 === PARAMÈTRES DE CAMÉRA (Scale 10x - FINAL) ===');
-    console.log('Camera position:', { x: 0, y: 2, z: 5 });
-    console.log('Orbit target:', { x: 0, y: 1.5, z: 0 });
-    console.log('MinDistance:', '1.5 | MaxDistance: 15');
-  }, []);
 
   return (
     <>
@@ -1076,7 +932,7 @@ const ControlPanel = memo(({ targetRotationRef, manualGreenLEDRef, manualRedLEDR
           pointerEvents: 'auto', // Permet les interactions avec les boutons
         }}
       >
-      {/* Bouton rotation gauche */}
+      {/* Left rotation button */}
         <button
           onClick={() => {
             targetRotationRef.current -= 0.5;
@@ -1107,7 +963,7 @@ const ControlPanel = memo(({ targetRotationRef, manualGreenLEDRef, manualRedLEDR
           ←
         </button>
 
-      {/* Indicateurs LED */}
+      {/* LED indicators */}
         <div style={{ display: 'flex', gap: '10px', margin: '0 10px' }}>
           <button
             onClick={() => {
@@ -1143,7 +999,7 @@ const ControlPanel = memo(({ targetRotationRef, manualGreenLEDRef, manualRedLEDR
           />
         </div>
 
-      {/* Bouton rotation droite */}
+      {/* Right rotation button */}
         <button
           onClick={() => {
             targetRotationRef.current += 0.5;

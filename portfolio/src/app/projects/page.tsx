@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useCallback } from "react";
 import { ALL_CATEGORIES, PROJECTS } from "./data";
 
 type UserProject = {
@@ -29,6 +29,11 @@ export default function ProjectsIndexPage() {
     return combined.filter(p => p.categories.includes(active));
   }, [active, userProjects]);
 
+  const setActiveAndCloseMenu = useCallback((category: string) => {
+    setActive(category);
+    setFilterMenuOpen(false);
+  }, []);
+
   return (
     <main className="projects-page">
       <aside className="projects-sidebar">
@@ -44,7 +49,7 @@ export default function ProjectsIndexPage() {
           ))}
         </ul>
 
-        {/* Dropdown mobile/portrait */}
+        {/* Mobile/portrait dropdown */}
         <div className={`filter-dropdown ${filterMenuOpen ? "open" : ""}`}>
           <button
             className="filter-button"
@@ -59,10 +64,7 @@ export default function ProjectsIndexPage() {
             <li role="option">
               <button
                 onMouseDown={(e) => e.preventDefault()}
-                onClick={() => {
-                  setFilterMenuOpen(false);
-                  setActive('ALL');
-                }}
+                onClick={() => setActiveAndCloseMenu('ALL')}
               >
                 All
               </button>
@@ -71,10 +73,7 @@ export default function ProjectsIndexPage() {
               <li key={cat} role="option">
                 <button
                   onMouseDown={(e) => e.preventDefault()}
-                  onClick={() => {
-                    setFilterMenuOpen(false);
-                    setActive(cat);
-                  }}
+                  onClick={() => setActiveAndCloseMenu(cat)}
                 >
                   {cat}
                 </button>
