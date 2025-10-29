@@ -2,7 +2,7 @@
 
 Portfolio personnel développé avec Next.js 15, présentant mes projets en design, technologie créative, biomaterials et ingénierie.
 
-## 🚀 Démarrage rapide
+## Démarrage rapide
 
 ### Installation
 
@@ -25,7 +25,7 @@ npm run build
 npm start
 ```
 
-## 📁 Structure du projet
+## Structure du projet
 
 ```
 portfolio/
@@ -46,7 +46,7 @@ portfolio/
 └── scripts/              # Scripts utilitaires
 ```
 
-## ✨ Fonctionnalités
+## Fonctionnalités
 
 ### Pages principales
 - **Accueil** : Carousel 3D interactif avec projets mis en avant
@@ -55,11 +55,11 @@ portfolio/
 - **Contact** : Formulaire de contact fonctionnel
 
 ### Fonctionnalités avancées
-- 🎨 **Visualisations 3D** : React Three Fiber pour modèles interactifs
-- 🔐 **Panel Admin** : Gestion de projets avec authentification
-- 📧 **Contact Email** : Envoi d'emails via Nodemailer
-- 📱 **Responsive** : Design adaptatif mobile/desktop
-- ⚡ **Optimisé** : Lazy loading, code splitting, performances
+- **Visualisations 3D** : React Three Fiber pour modèles interactifs
+- **Panel Admin** : Gestion de projets avec authentification
+- **Contact Email** : Envoi d'emails via Nodemailer
+- **Responsive** : Design adaptatif mobile/desktop
+- **Optimisé** : Lazy loading, code splitting, performances
 
 ## 🛠️ Technologies
 
@@ -71,7 +71,7 @@ portfolio/
 - **Icons** : Lucide React
 - **Langage** : TypeScript
 
-## 🎨 Composants 3D
+## Composants 3D
 
 ### HomeCarousel3D
 Carousel interactif affichant des modèles 3D en rotation (canapé mycelium, radar).
@@ -82,7 +82,7 @@ Scène 3D complexe avec détection de drones, contrôles interactifs et matéria
 ### MyceliumSofaScene
 Visualisation 3D du canapé en mycelium avec textures personnalisées.
 
-## 📝 Ajouter un projet
+## Ajouter un projet
 
 1. Ajouter les assets dans `public/assets/projects/[slug]/`
 2. Éditer `src/app/projects/data.ts` :
@@ -100,7 +100,7 @@ Visualisation 3D du canapé en mycelium avec textures personnalisées.
 
 3. Créer la page `src/app/projects/[slug]/page.tsx`
 
-## 🔐 Panel Admin
+## Panel Admin
 
 Accès : `/utilisateur`
 
@@ -125,19 +125,19 @@ EMAIL_PASS=votre_mot_de_passe_app
 EMAIL_TO=destination@email.com
 ```
 
-## 📧 Configuration Email
+## Configuration Email
 
 Pour activer le formulaire de contact, configurer les variables d'environnement email dans `.env.local`.
 
 **Gmail** : Utiliser un [mot de passe d'application](https://support.google.com/accounts/answer/185833).
 
-## 🎮 Jeux intégrés
+## Jeux intégrés
 
 Le portfolio inclut des jeux interactifs dans `public/games/`.
 
 Exemple : Rythme Car Game (Python → Web avec Pygbag)
 
-## 📦 Dépendances principales
+## Dépendances principales
 
 ```json
 {
@@ -169,14 +169,3 @@ npm start
 
 ## 📄 Licence
 
-© 2025 Corentin Chantereau - Tous droits réservés
-
-## 🔗 Liens
-
-- **LinkedIn** : [linkedin.com/in/corentin-chantereau](https://www.linkedin.com/in/corentin-chantereau)
-- **GitHub** : [github.com/corentinchantereau](https://github.com/corentinchantereau)
-- **Email** : corentin.chantereau@edu.devinci.fr
-
----
-
-Développé avec ❤️ par Corentin Chantereau
