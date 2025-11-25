@@ -151,7 +151,7 @@ Exemple : Rythme Car Game (Python → Web avec Pygbag)
 }
 ```
 
-## 🚀 Déploiement
+## Déploiement
 
 ### Vercel (Recommandé)
 
@@ -166,6 +166,4 @@ Exemple : Rythme Car Game (Python → Web avec Pygbag)
 npm run build
 npm start
 ```
-
-## 📄 Licence
 
